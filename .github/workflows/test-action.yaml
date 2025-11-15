@@ -5,7 +5,7 @@ on: pull_request
 jobs:
   scans:
     name: 'Scans'
-    uses: ./.github/workflows/security-checks.yml
+    uses: ./.github/workflows/security-checks.yaml
     with:
       semgrep_run: true
       trufflehog_run: true
