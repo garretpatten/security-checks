@@ -21,6 +21,7 @@ jobs:
   sast:
     name: 'Semgrep (SAST)'
     runs-on: ubuntu-latest
+    # yamllint disable-line rule:line-length
     if: github.event_name == 'pull_request' && github.actor != 'dependabot[bot]' && inputs.semgrep_run == true
 
     steps:
@@ -32,6 +33,7 @@ jobs:
       - name: 'Check for changes'
         id: changes
         run: |
+          # yamllint disable-line rule:line-length
           if [ -n "$(git diff --name-only "${{ github.event.repository.default_branch }}"...HEAD)" ]; then
             echo "has_changes=true" >> "$GITHUB_OUTPUT"
           else
@@ -41,11 +43,13 @@ jobs:
       - name: 'Run Semgrep'
         if: steps.changes.outputs.has_changes == 'true'
         run: |
+          # yamllint disable-line rule:line-length
           docker run --rm -v "$PWD:/src" -w /src returntocorp/semgrep semgrep ci --config=auto
 
   trufflehog:
     name: 'TruffleHog (Secret Scanning)'
     runs-on: ubuntu-latest
+    # yamllint disable-line rule:line-length
     if: github.event_name == 'pull_request' && github.actor != 'dependabot[bot]' && inputs.trufflehog_run == true
 
     steps:
@@ -57,6 +61,7 @@ jobs:
       - name: 'Check for changes'
         id: changes
         run: |
+          # yamllint disable-line rule:line-length
           if [ -n "$(git diff --name-only "${{ github.event.repository.default_branch }}"...HEAD)" ]; then
             echo "has_changes=true" >> "$GITHUB_OUTPUT"
           else
@@ -65,6 +70,7 @@ jobs:
 
       - name: 'Run TruffleHog'
         if: steps.changes.outputs.has_changes == 'true'
+        # yamllint disable-line rule:line-length
         uses: trufflesecurity/trufflehog@58222610ff8ff7a3069d2422276bf28ad52a743f
         with:
           path: ./
