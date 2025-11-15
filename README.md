@@ -46,10 +46,10 @@ making it efficient and focused on the code being reviewed.
 
 ## Input Parameters
 
-| Parameter      | Type    | Required | Default | Description                    |
-| -------------- | ------- | -------- | ------- | ------------------------------ |
-| semgrep_run    | boolean | No       | true    | Whether to run Semgrep scanner |
-| trufflehog_run | boolean | No       | true    | Whether to run TruffleHog      |
+| Parameter      | Type    | Required | Default | Description            |
+| -------------- | ------- | -------- | ------- | ---------------------- |
+| semgrep_run    | boolean | No       | true    | Run Semgrep scanner    |
+| trufflehog_run | boolean | No       | true    | Run TruffleHog scanner |
 
 ## Supported Security Scanners
 

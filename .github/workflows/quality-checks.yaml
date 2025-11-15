@@ -6,6 +6,7 @@ on:
 
 jobs:
   quality-checks:
+    name: 'Linters'
     uses: garretpatten/quality-checks/.github/workflows/quality-checks.yaml@master
     with:
       actionlint_run: true
