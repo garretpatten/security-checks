@@ -19,7 +19,7 @@ permissions:
 
 jobs:
   sast:
-    name: 'Semgrep (SAST)'
+    name: 'Semgrep - SAST'
     runs-on: ubuntu-latest
     # yamllint disable-line rule:line-length
     if: github.event_name == 'pull_request' && github.actor != 'dependabot[bot]' && inputs.semgrep_run == true
@@ -47,7 +47,7 @@ jobs:
           docker run --rm -v "$PWD:/src" -w /src returntocorp/semgrep semgrep ci --config=auto
 
   trufflehog:
-    name: 'TruffleHog (Secrets Scanning)'
+    name: 'TruffleHog - Secrets Scanning'
     runs-on: ubuntu-latest
     # yamllint disable-line rule:line-length
     if: github.event_name == 'pull_request' && github.actor != 'dependabot[bot]' && inputs.trufflehog_run == true
