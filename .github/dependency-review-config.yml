@@ -120,7 +120,6 @@ deny-licenses:
   - 'Parity-7.0.0'
   - 'PolyForm-Noncommercial-1.0.0'
   - 'PolyForm-Small-Business-1.0.0'
-  - 'Prosperity-3.0.0'
   - 'QPL-1.0'
   - 'RPL-1.1'
   - 'RPL-1.5'
