@@ -133,9 +133,17 @@ jobs:
             workflow_ref="${{ github.workflow_ref }}"
             repo="${workflow_ref%/.github/*}"
             ref="${workflow_ref##*@}"
-            curl -fsSL \
-              "https://raw.githubusercontent.com/${repo}/${ref}/.truffleignore" \
-              -o .truffleignore
+            if [[ "$ref" == refs/pull/*/merge ]]; then
+              ref="${{ github.sha }}"
+            fi
+            base_url="https://raw.githubusercontent.com"
+            path=".truffleignore"
+            fallback_repo="garretpatten/security-guardrails"
+            url="${base_url}/${repo}/${ref}/${path}"
+            fallback_url="${base_url}/${fallback_repo}/master/${path}"
+            if ! curl -fsSL "$url" -o ".truffleignore"; then
+              curl -fsSL "$fallback_url" -o ".truffleignore"
+            fi
           fi
 
       - name: 'Run TruffleHog'
@@ -199,10 +207,18 @@ jobs:
             workflow_ref="${{ github.workflow_ref }}"
             repo="${workflow_ref%/.github/*}"
             ref="${workflow_ref##*@}"
+            if [[ "$ref" == refs/pull/*/merge ]]; then
+              ref="${{ github.sha }}"
+            fi
+            base_url="https://raw.githubusercontent.com"
+            path=".github/dependency-review-config.yml"
+            fallback_repo="garretpatten/security-guardrails"
+            url="${base_url}/${repo}/${ref}/${path}"
+            fallback_url="${base_url}/${fallback_repo}/master/${path}"
             mkdir -p .github
-            curl -fsSL \
-              "https://raw.githubusercontent.com/${repo}/${ref}/.github/dependency-review-config.yml" \
-              -o .github/dependency-review-config.yml
+            if ! curl -fsSL "$url" -o ".github/dependency-review-config.yml"; then
+              curl -fsSL "$fallback_url" -o ".github/dependency-review-config.yml"
+            fi
           fi
 
       - name: 'Dependency review'
@@ -218,9 +234,17 @@ jobs:
             workflow_ref="${{ github.workflow_ref }}"
             repo="${workflow_ref%/.github/*}"
             ref="${workflow_ref##*@}"
-            curl -fsSL \
-              "https://raw.githubusercontent.com/${repo}/${ref}/.trivyignore" \
-              -o .trivyignore
+            if [[ "$ref" == refs/pull/*/merge ]]; then
+              ref="${{ github.sha }}"
+            fi
+            base_url="https://raw.githubusercontent.com"
+            path=".trivyignore"
+            fallback_repo="garretpatten/security-guardrails"
+            url="${base_url}/${repo}/${ref}/${path}"
+            fallback_url="${base_url}/${fallback_repo}/master/${path}"
+            if ! curl -fsSL "$url" -o ".trivyignore"; then
+              curl -fsSL "$fallback_url" -o ".trivyignore"
+            fi
           fi
           echo "path=.trivyignore" >> "$GITHUB_OUTPUT"
 
