@@ -7,13 +7,14 @@ Review, Trivy CVE/license audit, CycloneDX SBOM). Keep changes **high-signal**,
 
 ## Repository layout
 
-| Path                                         | Purpose                                                  |
-| -------------------------------------------- | -------------------------------------------------------- |
-| `.github/workflows/security-guardrails.yaml` | Reusable workflow consumed by other repos                |
-| `.github/workflows/test-workflow.yaml`       | Self-test on PRs (calls reusable workflow)               |
-| `.github/workflows/quality-checks.yaml`      | Calls `garretpatten/quality-checks` (see linters below)  |
-| `docs/assets/`                               | Branding (shield mark SVG)                               |
-| `.trivyignore`                               | Example path exclusions for Trivy (consumers copy/adapt) |
+| Path                                         | Purpose                                                     |
+| -------------------------------------------- | ----------------------------------------------------------- |
+| `.github/workflows/security-guardrails.yaml` | Reusable workflow consumed by other repos                   |
+| `.github/workflows/test-workflow.yaml`       | Self-test on PRs (calls reusable workflow)                  |
+| `.github/workflows/quality-checks.yaml`      | Calls `garretpatten/quality-checks` (see linters below)     |
+| `.github/actionlint.yaml`                    | actionlint config (e.g., suppressing known false positives) |
+| `docs/assets/`                               | Branding (shield mark SVG)                                  |
+| `.trivyignore`                               | Example path exclusions for Trivy (consumers copy/adapt)    |
 
 ## Workflow conventions
 
@@ -87,11 +88,11 @@ Local runs should pass before you finalize — especially **yamllint** on all
 `.github/` YAML (workflows, **`ISSUE_TEMPLATE`**, **`dependabot.yaml`**, not
 just `workflows/*.yaml`).
 
-| If you edited                                                                                     | Run                                                                    |
-| ------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| Any `*.md`                                                                                        | `npm run lint:md` and `npm run format:check` when layout/prose changed |
-| Workflows, **`ISSUE_TEMPLATE`**, **`dependabot.yaml`**, **`.yamllint`**, **`.markdownlint.yaml`** | `npm run lint:yaml` and `npm run lint:workflows`                       |
-| `package.json` / lockfile                                                                         | Full `npm run lint`                                                    |
+| If you edited                                                                                                                    | Run                                                                    |
+| -------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Any `*.md`                                                                                                                       | `npm run lint:md` and `npm run format:check` when layout/prose changed |
+| Workflows, **`ISSUE_TEMPLATE`**, **`dependabot.yaml`**, **`.yamllint`**, **`.markdownlint.yaml`**, **`.github/actionlint.yaml`** | `npm run lint:yaml` and `npm run lint:workflows`                       |
+| `package.json` / lockfile                                                                                                        | Full `npm run lint`                                                    |
 
 ## License
 

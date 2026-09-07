@@ -130,12 +130,8 @@ jobs:
         id: truffleignore
         run: |
           if [ ! -f .truffleignore ]; then
-            workflow_ref="${{ github.workflow_ref }}"
-            repo="${workflow_ref%/.github/*}"
-            ref="${workflow_ref##*@}"
-            if [[ "$ref" == refs/pull/*/merge ]]; then
-              ref="${{ github.sha }}"
-            fi
+            repo="${{ job.workflow_repository }}"
+            ref="${{ job.workflow_sha }}"
             base_url="https://raw.githubusercontent.com"
             path=".truffleignore"
             fallback_repo="garretpatten/security-guardrails"
@@ -204,12 +200,8 @@ jobs:
         id: dependency-review-config
         run: |
           if [ ! -f .github/dependency-review-config.yml ]; then
-            workflow_ref="${{ github.workflow_ref }}"
-            repo="${workflow_ref%/.github/*}"
-            ref="${workflow_ref##*@}"
-            if [[ "$ref" == refs/pull/*/merge ]]; then
-              ref="${{ github.sha }}"
-            fi
+            repo="${{ job.workflow_repository }}"
+            ref="${{ job.workflow_sha }}"
             base_url="https://raw.githubusercontent.com"
             path=".github/dependency-review-config.yml"
             fallback_repo="garretpatten/security-guardrails"
@@ -231,12 +223,8 @@ jobs:
         id: trivyignore
         run: |
           if [ ! -f .trivyignore ]; then
-            workflow_ref="${{ github.workflow_ref }}"
-            repo="${workflow_ref%/.github/*}"
-            ref="${workflow_ref##*@}"
-            if [[ "$ref" == refs/pull/*/merge ]]; then
-              ref="${{ github.sha }}"
-            fi
+            repo="${{ job.workflow_repository }}"
+            ref="${{ job.workflow_sha }}"
             base_url="https://raw.githubusercontent.com"
             path=".trivyignore"
             fallback_repo="garretpatten/security-guardrails"

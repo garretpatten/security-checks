@@ -1,0 +1,10 @@
+# actionlint configuration
+#
+# actionlint has not yet learned the new `job.workflow_*` context properties
+# for reusable workflows (workflow_ref, workflow_sha, workflow_repository,
+# workflow_file_path). Ignore the resulting false positives until actionlint
+# catches up.
+paths:
+  .github/workflows/security-guardrails.yaml:
+    ignore:
+      - 'property "workflow_(repository|sha)" is not defined in object type.+'
